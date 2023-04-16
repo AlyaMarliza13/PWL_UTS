@@ -14,18 +14,18 @@ class PelangganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        // $Pelanggan = Pelanggan::all();
-        if($request->has('search')){
-            $Pelanggan = Pelanggan::where('nama_pelanggan','LIKE',"%" . request('search'). "%")->paginate(5);
-        }else{
-           $Pelanggan = Pelanggan::paginate(5);
-        }
+     public function index(Request $request)
+     {
+         // $Pelanggan = Pelanggan::all();
+         if($request->has('search')){
+             $Pelanggan = Pelanggan::where('nama_pelanggan','LIKE',"%" . request('search'). "%")->paginate(5);
+         }else{
+            $Pelanggan = Pelanggan::paginate(5);
+         }
 
-        return view ('Pelanggan.Pelanggan')->with('Pelanggan', $Pelanggan);
+         return view ('Pelanggan.Pelanggan')->with('Pelanggan', $Pelanggan);
 
-    }
+     }
 
     /**
      * Show the form for creating a new resource.
