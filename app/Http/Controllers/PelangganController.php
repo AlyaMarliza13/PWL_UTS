@@ -27,20 +27,6 @@ class PelangganController extends Controller
 
     }
 
-    public function search(Request $request)
-	{
-		// menangkap data pencarian
-		$search = $request->search;
-
-    		// mengambil data dari table pegawai sesuai pencarian data
-		$Pelanggan = DB::table('Pelanggans')
-		->where('Pelanggans','like',"%".$search."%")
-		->paginate();
-
-    		// mengirim data pegawai ke view index
-		return view('index',['Pelanggans' => $Pelanggan]);
-	}
-
     /**
      * Show the form for creating a new resource.
      *

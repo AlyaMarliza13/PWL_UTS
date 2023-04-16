@@ -50,7 +50,6 @@
                 </div>
                </div>
             </form>
-
             <div class="card-body">
 
                 <a href="{{ url('Pengembalian/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
