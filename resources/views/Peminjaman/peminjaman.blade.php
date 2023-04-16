@@ -37,6 +37,7 @@
                 </div>
             </div>
         </div>
+
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-10">
                         <form action="{{url ('/Peminjaman')}}">

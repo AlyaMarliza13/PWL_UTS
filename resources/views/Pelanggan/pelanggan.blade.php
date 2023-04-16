@@ -25,7 +25,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-<<<<<<< HEAD
+
                 <h3 class="card-title"><b>Tabel Pelanggan</b></h3>
 
             <div class="card-tools">
