@@ -28,7 +28,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/', [HomeController::class,"index"]);
     Route::resource('/list_films', list_filmsController::class);
+    Route::get('/list_films/search','list_filmsController@search');
     Route::resource('/Pelanggan', PelangganController::class);
+    Route::get('/pelanggan/search','PelangganController@search');
     Route::resource('/Peminjaman', PeminjamanController::class);
     Route::resource('/Pengembalian', PengembalianController::class);
 });

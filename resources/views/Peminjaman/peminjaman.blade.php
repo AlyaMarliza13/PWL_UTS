@@ -96,7 +96,9 @@
                   </tbody>
                 </table>
                 </div>
+
                 {{ $Peminjaman->links() }}
+
               </div>
               <!-- /.card-body -->
             {{-- <div class="card-body">

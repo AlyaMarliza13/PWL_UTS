@@ -25,6 +25,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
+<<<<<<< HEAD
                 <h3 class="card-title"><b>Tabel Pelanggan</b></h3>
 
             <div class="card-tools">
@@ -34,6 +35,22 @@
                 <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
                     <i class="fas fa-times"></i>
                 </button>
+=======
+                <h3 class="card-title">Tabel Pelanggan</h3>
+                <p>Cari Pelanggan :</p>
+<form action="/pelanggan/search" method="GET">
+	<input type="text" name="search" placeholder="Cari pelanggan .." value="{{ old('search') }}">
+	<input type="submit" value="CARI">
+</form>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+>>>>>>> 982c6d8c04ac45eef0eada2214dc69e84642b0b2
             </div>
         </div>
         </div>

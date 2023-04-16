@@ -27,6 +27,7 @@
             <div class="card-header">
                 <h3 class="card-title"><b>Tabel List Film & Series</b></h3>
 
+<<<<<<< HEAD
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
@@ -34,6 +35,21 @@
                 <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
                     <i class="fas fa-times"></i>
                 </button>
+=======
+                <p>Cari Film :</p>
+<form action="/list_films/search" method="GET">
+	<input type="text" name="search" placeholder="Cari film .." value="{{ old('search') }}">
+	<input type="submit" value="CARI">
+</form>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+>>>>>>> 982c6d8c04ac45eef0eada2214dc69e84642b0b2
             </div>
         </div>
         </div>
