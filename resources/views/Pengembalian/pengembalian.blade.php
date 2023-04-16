@@ -25,7 +25,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tabel Pengembalian</h3>
+                <h3 class="card-title"><b>Tabel Pengembalian</b></h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -36,9 +36,24 @@
                     </button>
                 </div>
             </div>
+        </div>
+
+            <div class="row justify-content-center mb-3">
+                <div class="col-md-10">
+                    <form action="{{url ('/Pengembalian')}}">
+                   <div class="input-group mb-3">
+                     <input type="text" class="form-control" placeholder="Cari disini.." name="search">
+                        <div class="input-group-append">
+                         <button class="btn btn-danger" type="submit">Cari</button>
+                        </div>
+                    </div>
+                </div>
+               </div>
+            </form>
+
             <div class="card-body">
 
-                <a href="{{url('Pengembalian/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
+                <a href="{{ url('Pengembalian/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
 
                 <table class="table table-bordered table-striped">
                   <thead>
@@ -50,11 +65,12 @@
                       <th>Denda Keterlambatan</th>
                       <th>Kondisi</th>
                       <th>Status</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @if($pengembalian->count() > 0)
-                      @foreach($pengembalian as $i => $pg)
+                    @if($Pengembalian->count() > 0)
+                      @foreach($Pengembalian as $i => $pg)
                         <tr>
                           <td>{{++$i}}</td>
                           <td>{{$pg->kode_film}}</td>
@@ -65,12 +81,12 @@
                           <td>{{$pg->status}}</td>
                           <td>
                             <!-- Bikin tombol edit dan delete -->
-                            <a href="{{ url('/pengembalian/'. $pg->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
+                            <a href="{{ url('/Pengembalian/'. $pg->id.'/edit') }}" class="btn btn-sm btn-warning">edit</a>
 
-                            <form method="POST" action="{{ url('/pengembalian/'.$pg->id) }}" >
+                            <form method="POST" action="{{ url('/Pengembalian/'.$pg->id) }}" >
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                              <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data {{ $pg ->kode_pelanggan }}?')" class="btn btn-sm btn-danger">hapus</button>
                             </form>
                           </td>
                         </tr>
@@ -80,6 +96,8 @@
                     @endif
                   </tbody>
                 </table>
+            </div>
+                 {{ $Pengembalian->links() }}
               </div>
               <!-- /.card-body -->
             {{-- <div class="card-body">

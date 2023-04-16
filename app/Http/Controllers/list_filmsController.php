@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\list_films;
 use App\Models\list_filmsModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class list_filmsController extends Controller
 {
@@ -13,11 +14,17 @@ class list_filmsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $list_films = list_films::all();
-        return view ('list_films.list_films')
-                    ->with('list_films', $list_films);
+        // $list_films = list_films::all();
+        if($request->has('search')){
+            $list_films = list_films::where('nama_film','LIKE',"%" . request('search'). "%")->paginate(5);
+        }else{
+           $list_films = list_films::paginate(5);
+        }
+
+        return view ('list_films.list_films')->with('list_films', $list_films);
+
     }
 
     /**
@@ -42,7 +49,7 @@ class list_filmsController extends Controller
         $request->validate([
             'kode_film' => 'required|string|max:50',
             'nama_film' => 'required|string|max:100,',
-            'kategori_film' => 'required|in: Aksi,Anak-anak,Drama,Fiksi,Komedi,Keluarga,Petualangan,Sejarah',
+            'kategori_film' => 'required|in:Aksi,Anak-anak,Drama,Fiksi,Komedi,Keluarga,Petualangan,Sejarah',
             'jumlah' => 'required|integer',
             'harga_sewa' => 'required|integer',
         ]);
@@ -89,7 +96,7 @@ class list_filmsController extends Controller
         $request->validate([
             'kode_film' => 'required|string|max:50,'. $id,
             'nama_film' => 'required|string|max:100,',
-            'kategori_film' => 'required|in: Aksi,Anak-anak,Drama,Fiksi,Komedi,Keluarga,Petualangan,Sejarah',
+            'kategori_film' => 'required|in:Aksi,Anak-anak,Drama,Fiksi,Komedi,Keluarga,Petualangan,Sejarah',
             'jumlah' => 'required|integer',
             'harga_sewa' => 'required|integer',
         ]);
@@ -111,4 +118,5 @@ class list_filmsController extends Controller
         return redirect('list_films')
         ->with('success', 'List Film Berhasil dihapus');
     }
+
 }

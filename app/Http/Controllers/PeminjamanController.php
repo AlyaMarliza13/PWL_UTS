@@ -2,22 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\peminjaman;
-use App\Models\peminjamanModel;
+use App\Models\Peminjaman;
+use App\Models\PeminjamanModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class peminjamanController extends Controller
+class PeminjamanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $peminjaman = peminjaman::all();
-        return view ('peminjaman.peminjaman')
-                    ->with('peminjaman', $peminjaman);
+        // $Peminjaman = Peminjaman::all();
+        if($request->has('search')){
+            $Peminjaman = Peminjaman::where('kode_pelanggan','LIKE',"%" . request('search'). "%")->paginate(5);
+        }else{
+           $Peminjaman = Peminjaman::paginate(5);
+        }
+
+        return view ('Peminjaman.Peminjaman')->with('Peminjaman', $Peminjaman);
+
     }
 
     /**
@@ -27,7 +34,7 @@ class peminjamanController extends Controller
      */
     public function create()
     {
-        return view('peminjaman.create_peminjaman')
+        return view('Peminjaman.create_Peminjaman')
                     ->with('url_form', url('/Peminjaman'));
     }
 
@@ -48,15 +55,15 @@ class peminjamanController extends Controller
             'biaya_sewa' => 'required|integer',
         ]);
 
-        $data = peminjaman::create($request->except(['_token']));
-        return redirect('peminjaman')
-                    ->with('success', 'peminjaman berhasil ditambahkan');
+        $data = Peminjaman::create($request->except(['_token']));
+        return redirect('Peminjaman')
+                    ->with('success', 'Peminjaman berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\peminjaman  $peminjaman
+     * @param  \App\Models\Peminjaman  $Peminjaman
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -67,14 +74,14 @@ class peminjamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\peminjaman  $peminjaman
+     * @param  \App\Models\Peminjaman  $Peminjaman
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $peminjaman = peminjaman::find($id);
-        return view('peminjaman.create_peminjaman')
-                ->with('peminjaman', $peminjaman)
+        $Peminjaman = Peminjaman::find($id);
+        return view('Peminjaman.create_Peminjaman')
+                ->with('Peminjaman', $Peminjaman)
                 ->with('url_form', url('/Peminjaman/'. $id));
     }
 
@@ -82,7 +89,7 @@ class peminjamanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\peminjaman  $peminjaman
+     * @param  \App\Models\Peminjaman  $Peminjaman
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,21 +103,21 @@ class peminjamanController extends Controller
             'biaya_sewa' => 'required|integer',
         ]);
 
-        $data = peminjaman::where('id', '=', $id)->update($request->except(['_token', '_method']));
-        return redirect('peminjaman')
-                    ->with('success', 'peminjaman berhasil diedit');
+        $data = Peminjaman::where('id', '=', $id)->update($request->except(['_token', '_method']));
+        return redirect('Peminjaman')
+                    ->with('success', 'Peminjaman berhasil diedit');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\peminjaman  $peminjaman
+     * @param  \App\Models\Peminjaman  $Peminjaman
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        peminjaman::where('id', '=', $id)->delete();
-        return redirect('peminjaman')
-        ->with('success', 'peminjaman Berhasil dihapus');
+        Peminjaman::where('id', '=', $id)->delete();
+        return redirect('Peminjaman')
+        ->with('success', 'Peminjaman Berhasil dihapus');
     }
 }

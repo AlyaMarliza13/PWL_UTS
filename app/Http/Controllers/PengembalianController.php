@@ -2,24 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pengembalian;
-use App\Models\pengembalianModel;
+use App\Models\Pengembalian;
+use App\Models\PengembalianModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class pengembalianController extends Controller
+class PengembalianController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pengembalian = pengembalian::all();
-        return view ('pengembalian.pengembalian')
-                    ->with('pengembalian', $pengembalian);
-    }
+        // $Pengembalian = Pengembalian::all();
+        if($request->has('search')){
+            $Pengembalian = Pengembalian::where('kode_pelanggan','LIKE',"%" . request('search'). "%")->paginate(5);
+        }else{
+           $Pengembalian = Pengembalian::paginate(5);
+        }
 
+        return view ('Pengembalian.Pengembalian')->with('Pengembalian', $Pengembalian);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -27,8 +33,8 @@ class pengembalianController extends Controller
      */
     public function create()
     {
-        return view('pengembalian.create_pengembalian')
-                    ->with('url_form', url('/pengembalian'));
+        return view('Pengembalian.create_Pengembalian')
+                    ->with('url_form', url('/Pengembalian'));
     }
 
     /**
@@ -49,15 +55,15 @@ class pengembalianController extends Controller
             'status' => 'required|string|max:50',
         ]);
 
-        $data = pengembalian::create($request->except(['_token']));
-        return redirect('pengembalian')
-                    ->with('success', 'pengembalian berhasil ditambahkan');
+        $data = Pengembalian::create($request->except(['_token']));
+        return redirect('Pengembalian')
+                    ->with('success', 'Pengembalian berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\pengembalian  $pengembalian
+     * @param  \App\Models\Pengembalian  $Pengembalian
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -68,22 +74,22 @@ class pengembalianController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\pengembalian  $pengembalian
+     * @param  \App\Models\Pengembalian  $Pengembalian
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $pengembalian = pengembalian::find($id);
-        return view('pengembalian.create_pengembalian')
-                ->with('pengembalian', $pengembalian)
-                ->with('url_form', url('/pengembalian/'. $id));
+        $Pengembalian = Pengembalian::find($id);
+        return view('Pengembalian.create_Pengembalian')
+                ->with('Pengembalian', $Pengembalian)
+                ->with('url_form', url('/Pengembalian/'. $id));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\pengembalian  $pengembalian
+     * @param  \App\Models\Pengembalian  $Pengembalian
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -98,21 +104,21 @@ class pengembalianController extends Controller
             'status' => 'required|string|max:50',
         ]);
 
-        $data = pengembalian::where('id', '=', $id)->update($request->except(['_token', '_method']));
-        return redirect('pengembalian')
-                    ->with('success', 'pengembalian berhasil diedit');
+        $data = Pengembalian::where('id', '=', $id)->update($request->except(['_token', '_method']));
+        return redirect('Pengembalian')
+                    ->with('success', 'Pengembalian berhasil diedit');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\pengembalian  $pengembalian
+     * @param  \App\Models\Pengembalian  $Pengembalian
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        pengembalian::where('id', '=', $id)->delete();
-        return redirect('pengembalian')
-        ->with('success', 'pengembalian Berhasil dihapus');
+        Pengembalian::where('id', '=', $id)->delete();
+        return redirect('Pengembalian')
+        ->with('success', 'Pengembalian Berhasil dihapus');
     }
 }

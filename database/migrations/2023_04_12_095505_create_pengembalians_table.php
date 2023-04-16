@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('kode_film', 50)->unique();
             $table->string('kode_pelanggan', 50)->unique();
             $table->enum('jenis_peminjaman', ['Harian', 'Mingguan', 'Bulanan']);
-            $table->date('tanggal_pengembalian');
+            $table->date('tanggal_pengembalian')->nullable();
             $table->integer('denda_keterlambatan');
             $table->string('kondisi', 150);
             $table->string('status', 50);

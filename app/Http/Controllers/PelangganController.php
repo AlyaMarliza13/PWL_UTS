@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pelanggan;
 use App\Models\PelangganModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PelangganController extends Controller
 {
@@ -13,11 +14,17 @@ class PelangganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Pelanggan = Pelanggan::all();
-        return view ('Pelanggan.Pelanggan')
-                    ->with('Pelanggan', $Pelanggan);
+        // $Pelanggan = Pelanggan::all();
+        if($request->has('search')){
+            $Pelanggan = Pelanggan::where('nama_pelanggan','LIKE',"%" . request('search'). "%")->paginate(5);
+        }else{
+           $Pelanggan = Pelanggan::paginate(5);
+        }
+
+        return view ('Pelanggan.Pelanggan')->with('Pelanggan', $Pelanggan);
+
     }
 
     /**

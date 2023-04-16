@@ -25,17 +25,32 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tabel List Film & Series</h3>
+                <h3 class="card-title"><b>Tabel List Film & Series</b></h3>
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
+        </div>
+        </div>
+
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-10">
+                        <form action="{{url ('/list_films')}}" method="GET">
+                       <div class="input-group mb-3">
+                         <input type="text" class="form-control" placeholder="keyword" name="search">
+                            <div class="input-group-append">
+                             <button class="btn btn-danger" type="submit"> Cari</button>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </form>
+
             <div class="card-body">
 
                 <a href="{{url('list_films/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
@@ -49,6 +64,7 @@
                       <th>Kategori Film</th>
                       <th>Jumlah</th>
                       <th>Harga Sewa</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -77,6 +93,10 @@
                     @endif
                   </tbody>
                 </table>
+            </div>
+
+                   {{ $list_films->links() }}
+
               </div>
               <!-- /.card-body -->
             {{-- <div class="card-body">

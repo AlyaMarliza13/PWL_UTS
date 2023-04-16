@@ -25,7 +25,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tabel Peminjaman</h3>
+                <h3 class="card-title"><b>Tabel Peminjaman</b></h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -36,8 +36,22 @@
                     </button>
                 </div>
             </div>
-            <div class="card-body">
+        </div>
 
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-10">
+                        <form action="{{url ('/Peminjaman')}}">
+                       <div class="input-group mb-3">
+                         <input type="text" class="form-control" placeholder="Cari disini.." name="search">
+                            <div class="input-group-append">
+                             <button class="btn btn-danger" type="submit">Cari</button>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </form>
+
+                <div class="card-body">
                 <a href="{{url('Peminjaman/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
 
                 <table class="table table-bordered table-striped">
@@ -50,11 +64,12 @@
                       <th>Tanggal Pinjam</th>
                       <th>Tanggal Pengembalian</th>
                       <th>Biaya Sewa</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @if($peminjaman->count() > 0)
-                      @foreach($peminjaman as $i => $pj)
+                    @if($Peminjaman->count() > 0)
+                      @foreach($Peminjaman as $i => $pj)
                         <tr>
                           <td>{{++$i}}</td>
                           <td>{{$pj->kode_film}}</td>
@@ -70,7 +85,7 @@
                             <form method="POST" action="{{ url('/Peminjaman/'.$pj->id) }}" >
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                              <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data {{ $pj->kode_pelanggan }}?')" class="btn btn-sm btn-danger">hapus</button>
                             </form>
                           </td>
                         </tr>
@@ -80,6 +95,8 @@
                     @endif
                   </tbody>
                 </table>
+                </div>
+                {{ $Peminjaman->links() }}
               </div>
               <!-- /.card-body -->
             {{-- <div class="card-body">
@@ -96,7 +113,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($peminjaman as $no => $l)
+                        @foreach($Peminjaman as $no => $l)
                             <tr class="">
                                 <td>{{$no}}</td>
                                 <td>{{$l->nama}}</td>

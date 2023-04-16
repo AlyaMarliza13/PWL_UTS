@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\list_filmsController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\PengembalianController;
 */
 
 Auth::routes();
+
 Route::get('Logout', [LoginController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
@@ -30,3 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/Peminjaman', PeminjamanController::class);
     Route::resource('/Pengembalian', PengembalianController::class);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

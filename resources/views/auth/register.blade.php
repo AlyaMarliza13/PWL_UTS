@@ -20,7 +20,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href=""><b>Blockbuster Haven</b></a>
+    <a href=""><b>Blockbuster</b> Haven</a>
   </div>
 
   <div class="card">
@@ -30,7 +30,7 @@
       <form action="{{ url('/register')}}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input type="name" name="name" class="form-control" placeholder="Full name">
+          <input type="name" name="name" class="form-control" placeholder="Name">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -90,7 +90,7 @@
         </a>
       </div>
 
-      <a href="login.html" class="text-center">I already have a membership</a>
+      <a href="/login" class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

@@ -25,17 +25,32 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Tabel Pelanggan</h3>
+                <h3 class="card-title"><b>Tabel Pelanggan</b></h3>
 
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
+        </div>
+        </div>
+
+                <div class="row justify-content-center mb-3">
+                    <div class="col-md-10">
+                        <form action="{{url ('/Pelanggan')}}">
+                       <div class="input-group mb-3">
+                         <input type="text" class="form-control" placeholder="Cari disini.." name="search">
+                            <div class="input-group-append">
+                             <button class="btn btn-danger" type="submit">Cari</button>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </form>
+
             <div class="card-body">
 
                 <a href="{{url('Pelanggan/create')}}" class="btn btn-sm btn-success my-2">Tambah Data</a>
@@ -50,6 +65,7 @@
                       <th>Alamat Pelanggan</th>
                       <th>Nomor HP</th>
                       <th>Riwayat Peminjaman</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -70,7 +86,7 @@
                             <form method="POST" action="{{ url('/Pelanggan/'.$pl->id) }}" >
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="btn btn-sm btn-danger">hapus</button>
+                              <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data {{ $pl->nama_pelanggan }}?')" class="btn btn-sm btn-danger">hapus</button>
                             </form>
                           </td>
                         </tr>
@@ -80,6 +96,12 @@
                     @endif
                   </tbody>
                 </table>
+            </div>
+
+            {{ $Pelanggan->links() }}
+
+       </div>
+
               </div>
               <!-- /.card-body -->
             {{-- <div class="card-body">

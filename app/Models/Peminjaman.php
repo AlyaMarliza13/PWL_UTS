@@ -15,7 +15,7 @@ class Peminjaman extends Model
         'kode_film',
         'kode_pelanggan',
         'jenis_peminjaman',
-        'tanggal_peminjaman',
+        'tanggal_pinjam',
         'tanggal_pengembalian',
         'biaya_sewa',
     ];
